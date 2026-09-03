@@ -26,7 +26,7 @@ Community project, not affiliated with IFM.
   llama.cpp fork branch [MBZUAI-IFM/llama.cpp `model/K2Horizon`](https://github.com/MBZUAI-IFM/llama.cpp/tree/model/K2Horizon),
   SGLang cookbook [docs.sglang.io/cookbook/autoregressive/IFM/K2-Horizon](https://docs.sglang.io/cookbook/autoregressive/IFM/K2-Horizon),
   vLLM recipe [recipes.vllm.ai/IFM](https://recipes.vllm.ai/IFM)
-- Data: [K2-Horizon-Pretrain-Data](https://huggingface.co/datasets/IFM/K2-Horizon-Pretrain-Data),
+- Data (listed on the model cards; both returned 401 to anonymous requests on 2026-09-03, so gated or not yet public): [K2-Horizon-Pretrain-Data](https://huggingface.co/datasets/IFM/K2-Horizon-Pretrain-Data),
   [K2-Horizon-Midtrain-Data](https://huggingface.co/datasets/IFM/K2-Horizon-Midtrain-Data)
 
 ## Hardware
