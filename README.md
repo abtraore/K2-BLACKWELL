@@ -9,6 +9,26 @@ throughput.
 
 Community project, not affiliated with IFM.
 
+## K2 Horizon links
+
+- Announcement: [ifm.ai/blog/k2](https://ifm.ai/blog/k2) and the get-started page [ifm.ai/k2](https://ifm.ai/k2/#get-started)
+- Weights on Hugging Face: [K2-Horizon-0.9B](https://huggingface.co/IFM/K2-Horizon-0.9B),
+  [K2-Horizon-3.7B](https://huggingface.co/IFM/K2-Horizon-3.7B),
+  [K2-Horizon-7B](https://huggingface.co/IFM/K2-Horizon-7B) / [7B-FP8](https://huggingface.co/IFM/K2-Horizon-7B-FP8),
+  [K2-Horizon-32B](https://huggingface.co/IFM/K2-Horizon-32B) / [32B-FP8](https://huggingface.co/IFM/K2-Horizon-32B-FP8),
+  [K2-Horizon-MoVA-36B-A4B](https://huggingface.co/IFM/K2-Horizon-MoVA-36B-A4B)
+- BF16 GGUFs from IFM: [0.9B](https://huggingface.co/IFM/K2-Horizon-0.9B-GGUF),
+  [3.7B](https://huggingface.co/IFM/K2-Horizon-3.7B-GGUF),
+  [7B](https://huggingface.co/IFM/K2-Horizon-7B-GGUF),
+  [32B](https://huggingface.co/IFM/K2-Horizon-32B-GGUF),
+  [MoVA-36B-A4B](https://huggingface.co/IFM/K2-Horizon-MoVA-36B-A4B-GGUF)
+- Engines: vLLM support [vllm-project/vllm#55063](https://github.com/vllm-project/vllm/pull/55063) (merged 2026-09-03),
+  llama.cpp fork branch [MBZUAI-IFM/llama.cpp `model/K2Horizon`](https://github.com/MBZUAI-IFM/llama.cpp/tree/model/K2Horizon),
+  SGLang cookbook [docs.sglang.io/cookbook/autoregressive/IFM/K2-Horizon](https://docs.sglang.io/cookbook/autoregressive/IFM/K2-Horizon),
+  vLLM recipe [recipes.vllm.ai/IFM](https://recipes.vllm.ai/IFM)
+- Data: [K2-Horizon-Pretrain-Data](https://huggingface.co/datasets/IFM/K2-Horizon-Pretrain-Data),
+  [K2-Horizon-Midtrain-Data](https://huggingface.co/datasets/IFM/K2-Horizon-Midtrain-Data)
+
 ## Hardware
 
 Current fleet: one box, "saturn": 6x RTX 5090 32 GB (sm120, PCIe, no NVLink),
