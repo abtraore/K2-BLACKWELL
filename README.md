@@ -1,5 +1,7 @@
 # K2-BLACKWELL
 
+![K2 Horizon on RTX 5090](social-preview.png)
+
 Verified K2 Horizon serving recipes for consumer Blackwell (RTX 5090,
 sm120). Every number here was measured on real machines with the exact
 commands published next to it. No screenshots without flags, no "trust me"
