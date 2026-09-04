@@ -97,6 +97,16 @@ where the context allows it.
   `content` with `finish_reason=length`. The shared image now carries a
   one-line fix (unclosed think block = reasoning, content empty); budget
   `max_tokens` generously regardless.
+- **"It loops in reasoning unless you penalise repeats" checked**: 0.9B
+  and 3.7B, four prompts each, high effort, 8,000-token budget, vLLM
+  default sampling vs `repetition_penalty` 1.1. 8-gram repeat ratio inside
+  the reasoning was 0.00 to 0.05 on all 16 runs, with or without the
+  penalty. What does happen: the 3.7B spends the whole 8,000 tokens on
+  trial division for "is 1,000,003 prime" (it is), and with the stock
+  parser those 18,689 characters of scratchpad come back as `content`.
+  The penalty "fixes" that by making the model close the think block
+  sooner (3,161 tokens); on the 0.9B it also made the trip-planning
+  prompt stop mid-think with no answer. Fix the parser, not the sampler.
 - **Needle at 60K inside 100K**: found by the 7B (vLLM, fp8 KV) and the
   3.7B (llama.cpp, bf16 KV); not found by the 3.7B on vLLM with fp8 KV, by
   the 0.9B on either engine, or by the 32B-FP8. One sample per row; the
