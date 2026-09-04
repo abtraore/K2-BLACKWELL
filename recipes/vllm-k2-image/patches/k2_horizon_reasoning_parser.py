@@ -60,13 +60,17 @@ class K2HorizonReasoningParser(DeepSeekR1ReasoningParser):
         if tool_start != -1:
             return output[:tool_start], output[tool_start:]
 
-        # saturn (2026-09-04): an output that opened the think block and was cut
-        # off (max_tokens) before closing it is unfinished REASONING, not an
-        # answer. Upstream returned it as content, so clients showed the
-        # model's scratchpad as the reply with finish_reason=length.
-        if started:
-            return output, None
-        return "", output or None
+        # saturn (2026-09-04): the chat template opens the think block INSIDE
+        # the generation prompt ("<|ifm|im_start|>assistant\n<ifm|think>\n"),
+        # so the model's output never carries the start token itself. An
+        # output with no end token and no tool-call start is therefore an
+        # unfinished think block (cut off by max_tokens): unfinished
+        # REASONING, not an answer. Upstream returned it as content, so
+        # clients showed the scratchpad as the reply with finish_reason=length.
+        # This matches the streaming path, which already emits everything
+        # before the end token as reasoning.
+        del started
+        return output, None
 
     def extract_reasoning(
         self,

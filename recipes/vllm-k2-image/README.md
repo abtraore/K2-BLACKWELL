@@ -16,5 +16,8 @@ built in, at which point this directory is just a pinned base.
 
 One file differs from upstream by a single branch: `k2_horizon_reasoning_parser.py`
 returns an unclosed think block as reasoning instead of content (upstream shows the
-model's scratchpad as the answer when `max_tokens` cuts the thinking off). Retire it
+model's scratchpad as the answer when `max_tokens` cuts the thinking off; the chat
+template opens the think block inside the generation prompt, so the output never
+carries the start token and the parser cannot key on it). Verified live on the 3.7B:
+truncated, full, low-effort, tool-call and streaming requests all parse. Retire it
 when vllm-project/vllm fixes `_split_model_output`.
