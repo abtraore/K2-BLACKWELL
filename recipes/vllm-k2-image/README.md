@@ -13,3 +13,8 @@ Python files from the K2 Horizon merge commit
 merged 2026-09-03 08:17Z, two hours after that nightly was cut). The files
 in `patches/` are the upstream files unmodified. Any later nightly has them
 built in, at which point this directory is just a pinned base.
+
+One file differs from upstream by a single branch: `k2_horizon_reasoning_parser.py`
+returns an unclosed think block as reasoning instead of content (upstream shows the
+model's scratchpad as the answer when `max_tokens` cuts the thinking off). Retire it
+when vllm-project/vllm fixes `_split_model_output`.

@@ -50,6 +50,7 @@ class K2HorizonReasoningParser(DeepSeekR1ReasoningParser):
         return model_output.removeprefix(self.start_token)
 
     def _split_model_output(self, model_output: str) -> tuple[str, str | None]:
+        started = model_output.startswith(self.start_token)
         output = self._without_generated_start(model_output)
         if self.end_token in output:
             reasoning, _, content = output.partition(self.end_token)
@@ -59,6 +60,12 @@ class K2HorizonReasoningParser(DeepSeekR1ReasoningParser):
         if tool_start != -1:
             return output[:tool_start], output[tool_start:]
 
+        # saturn (2026-09-04): an output that opened the think block and was cut
+        # off (max_tokens) before closing it is unfinished REASONING, not an
+        # answer. Upstream returned it as content, so clients showed the
+        # model's scratchpad as the reply with finish_reason=length.
+        if started:
+            return output, None
         return "", output or None
 
     def extract_reasoning(

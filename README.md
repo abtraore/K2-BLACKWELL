@@ -85,6 +85,18 @@ where the context allows it.
   asserts inside the MoVA fused kernel; the recipe carries a one-line
   patch (value experts stay bf16) with the upstream thread and retirement
   condition in its Dockerfile.
+- **Sampling sanity, all five models, vLLM (2026-09-04)**: three prompts
+  (code, arithmetic word problem, one-paragraph explanation) at vLLM's bare
+  default (temperature 1.0, no top-p; the checkpoints ship no sampling
+  defaults) and at IFM's recommended 1.0 / 0.95. No garbage on any model in
+  either mode: no repetition loops, no stray non-Latin tokens, the train
+  problem came out 145 minutes everywhere. What did surface is a parser
+  edge case: at high effort the thinking often runs past a 700-token
+  budget, and when the output is cut off before `</ifm|think>` closes,
+  upstream's `k2_horizon` reasoning parser returns the whole scratchpad as
+  `content` with `finish_reason=length`. The shared image now carries a
+  one-line fix (unclosed think block = reasoning, content empty); budget
+  `max_tokens` generously regardless.
 - **Needle at 60K inside 100K**: found by the 7B (vLLM, fp8 KV) and the
   3.7B (llama.cpp, bf16 KV); not found by the 3.7B on vLLM with fp8 KV, by
   the 0.9B on either engine, or by the 32B-FP8. One sample per row; the
